@@ -82,13 +82,11 @@ def menu_administrador():
 
         elif opcion == "7":
             break
-
-
-# ===============================
+            
 # MENÚ PRINCIPAL
-# ===============================
+
 def main():
-    print("Bienvenido a PoliTours")
+    print("Bienvenido al POLITOUR ")
     print("1. Registrarse\n2. Iniciar sesión como Cliente\n3. Iniciar sesión como Administrador")
     op = input("Seleccione: ")
 
