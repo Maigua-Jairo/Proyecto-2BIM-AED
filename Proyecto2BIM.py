@@ -1,6 +1,16 @@
 # Proyecto ----> Rutas Turísticas
 import os
 
+# ARCHIVOS NECESARIOS
+if not os.path.exists("data"):
+    os.makedirs("data")
+if not os.path.exists("data/usuarios.txt"):
+    with open("data/usuarios.txt", "w") as f:
+        pass
+if not os.path.exists("data/rutas.txt"):
+    with open("data/rutas.txt", "w") as f:
+        pass
+
 # VALIDACIÓN DE CONTRASEÑA
 
 def es_contrasena_segura(clave):
@@ -20,16 +30,13 @@ def registrar_usuario():
     clave = input("Contraseña segura: ")
 
     if not es_contrasena_segura(clave):
-        print("❌ La contraseña debe tener una mayúscula, una minúscula, un número y mínimo 6 caracteres.\n")
+        print(" La contraseña debe tener una mayúscula, una minúscula, un número y mínimo 6 caracteres.\n")
         return
-
-    if not os.path.exists("data"):
-        os.makedirs("data")
 
     with open("data/usuarios.txt", "a") as archivo:
         archivo.write(f"{usuario},{clave},{nombre},{cedula},{edad}\n")
 
-    print("✅ Usuario registrado con éxito.\n")
+    print(" Usuario registrado con éxito.\n")
 
 # INICIO DE SESIÓN
 
@@ -38,18 +45,14 @@ def iniciar_sesion():
     usuario = input("Correo: ")
     clave = input("Contraseña: ")
 
-    if not os.path.exists("data/usuarios.txt"):
-        print("⚠️ No hay usuarios registrados aún.\n")
-        return None
-
     with open("data/usuarios.txt", "r") as archivo:
         for linea in archivo:
             datos = linea.strip().split(",")
             if datos[0] == usuario and datos[1] == clave:
-                print(f"✅ Bienvenido, {datos[2]}!\n")
+                print(f" Bienvenido, {datos[2]}!\n")
                 return datos  # Retorna los datos del usuario
 
-    print("❌ Correo o contraseña incorrectos.\n")
+    print("Correo o contraseña incorrectos.\n")
     return None
 
 # MENÚ CLIENTE (SIMPLIFICADO PARA COMPLETAR EJECUCIÓN)
@@ -68,16 +71,15 @@ class Grafo:
 
 def cargar_rutas():
     grafo = {}
-    if os.path.exists("data/rutas.txt"):
-        with open("data/rutas.txt", "r") as archivo:
-            for linea in archivo:
-                partes = linea.strip().split(",")
-                if len(partes) == 3:
-                    origen, destino, costo = partes
-                    costo = int(costo)
-                    if origen not in grafo:
-                        grafo[origen] = []
-                    grafo[origen].append((destino, costo))
+    with open("data/rutas.txt", "r") as archivo:
+        for linea in archivo:
+            partes = linea.strip().split(",")
+            if len(partes) == 3:
+                origen, destino, costo = partes
+                costo = int(costo)
+                if origen not in grafo:
+                    grafo[origen] = []
+                grafo[origen].append((destino, costo))
     return grafo
 
 def guardar_rutas(grafo, ruta):
