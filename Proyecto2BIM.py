@@ -1,8 +1,5 @@
 import os
 
-# ========================
-# ARCHIVOS NECESARIOS
-# ========================
 if not os.path.exists("data"):
     os.makedirs("data")
 if not os.path.exists("data/usuarios.txt"):
@@ -12,18 +9,15 @@ if not os.path.exists("data/rutas.txt"):
     with open("data/rutas.txt", "w") as f:
         pass
 
-# ========================
 # VALIDACIÓN DE CONTRASEÑA
-# ========================
+
 def es_contrasena_segura(clave):
     tiene_mayuscula = any(c.isupper() for c in clave)
     tiene_minuscula = any(c.islower() for c in clave)
     tiene_numero = any(c.isdigit() for c in clave)
     return tiene_mayuscula and tiene_minuscula and tiene_numero and len(clave) >= 6
 
-# ========================
 # REGISTRO E INICIO DE SESIÓN
-# ========================
 def registrar_usuario():
     print("=== REGISTRO ===")
     nombre = input("Nombre completo: ")
@@ -55,9 +49,7 @@ def iniciar_sesion():
     print("Correo o contraseña incorrectos.\n")
     return None
 
-# ========================
 # GESTIÓN DE RUTAS (ADMINISTRADOR)
-# ========================
 class Grafo:
     def __init__(self):
         self.grafo = {}
@@ -162,9 +154,7 @@ def menu_administrador():
         elif opcion == "7":
             break
 
-# ========================
 # ZONAS TURÍSTICAS Y DIJKSTRA
-# ========================
 grafo = {
     "Quito": ["Guayaquil", "Cuenca", "Baños", "Ambato", "Riobamba"],
     "Guayaquil": ["Quito", "Cuenca", "Machala", "Loja"],
@@ -228,9 +218,7 @@ def dijkstra(ciudad_inicio, ciudad_fin):
     else:
         return distancias[ciudad_fin], ruta
 
-# ========================
 # CLIENTE: SELECCIÓN DE RUTAS
-# ========================
 lugares_seleccionados = []
 
 def mostrar_zonas():
@@ -338,9 +326,8 @@ def menu_seleccion():
         else:
             print("Opción inválida.")
 
-# ========================
+
 # GESTIÓN DE GRAFO FIJO
-# ========================
 def mostrar_mapa():
     print("\n=== MAPA DE RUTAS ===")
     for origen in grafo:
@@ -381,9 +368,8 @@ def menu_grafo():
         else:
             print("Opción inválida.")
 
-# ========================
+
 # MENÚ PRINCIPAL
-# ========================
 def main():
     while True:
         print("\n=== BIENVENIDO A POLITOUR ===")
@@ -410,7 +396,5 @@ def main():
         else:
             print("Opción inválida.")
 
-# ========================
-# EJECUCIÓN
-# ========================
+#Llamado a la funcion main que contiene todo
 main()
