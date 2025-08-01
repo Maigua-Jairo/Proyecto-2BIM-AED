@@ -34,20 +34,19 @@ def registrar_usuario():
         archivo.write(f"{usuario},{clave},{nombre},{cedula},{edad}\n")
 
     print("Usuario registrado con éxito.\n")
-
 def iniciar_sesion():
-    print("=== INICIAR SESIÓN ===")
-    usuario = input("Correo: ")
-    clave = input("Contraseña: ")
+    usuario = input("Ingrese su usuario: ")
+    contraseña = input("Ingrese su contraseña: ")
 
     with open("data/usuarios.txt", "r") as archivo:
         for linea in archivo:
             datos = linea.strip().split(",")
-            if datos[0] == usuario and datos[1] == clave:
-                print(f"Bienvenido, {datos[2]}!\n")
-                return datos
-    print("Correo o contraseña incorrectos.\n")
+            if len(datos) >= 2 and datos[0] == usuario and datos[1] == contraseña:
+                print("Inicio de sesión exitoso.")
+                return usuario  # Retorna el nombre de usuario
+    print("Usuario o contraseña incorrectos.")
     return None
+
 
 # GESTIÓN DE RUTAS (ADMINISTRADOR)
 class Grafo:
@@ -153,6 +152,19 @@ def menu_administrador():
             print("Cambios guardados.")
         elif opcion == "7":
             break
+def menu_cliente():
+    while True:
+        print("\n=== MENÚ CLIENTE ===")
+        print("1. Selección de rutas turísticas")
+        print("2. Salir")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            menu_seleccion()
+        elif opcion == "2":
+            break
+        else:
+            print("Opción inválida.")
+
 
 # ZONAS TURÍSTICAS Y DIJKSTRA
 grafo = {
